@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-tjzd3=9hc8+lv82+j8ppzv+fjuk@pi2bpqb2@4_&ml-02*!!j8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app' , '.now.sh','127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -118,14 +118,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+import os 
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
-MEDIA_ROOT = BASE_DIR /"media"
+STATICFILES_DIR = (
+    os.path.join(BASE_DIR, "public/static"),  # Make sure this points to your static files
+)
+
+# MEDIA_ROOT = BASE_DIR /"media"
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'public/static') 
 
 MEDIA_URL = "/media/"
 
@@ -140,3 +144,12 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+LOGIN_URL = 'userform/'  # This redirects to the login page if the user isn't logged in
+
+
+
+# Set session settings if needed
+SESSION_COOKIE_AGE = 1209600  # Two weeks in seconds
+SESSION_SAVE_EVERY_REQUEST = True  # Optionally save the session on each request
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Session will not expire when the browser is closed
